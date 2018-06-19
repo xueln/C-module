@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<script src="father.js"></script>
+<script src="button.js"></script>
+<div id="app">
+
+</div>
+<script>
+
+    let likeBtn=new LikeBtn({color:'red'});
+    let container=document.querySelector('#app');
+    likeBtn.mount(container)
+
+
+//    let likeText=document.querySelector('.like-text')
+//    let liked=false;
+//    likeBtn.addEventListener('click',function(){
+//        liked=!liked;
+//        likeText.innerHTML=liked?'取消':'点赞'
+//    })
+
+</script>
+</body>
+</html>

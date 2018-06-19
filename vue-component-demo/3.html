@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <parent :attr="msg"></parent>
+        <par :title="msg"></par>
+    </div>
+    <template id="parent">
+        <div>34384738468347{{attr}}
+        <child></child>
+        </div>
+    </template>
+    <template id="child">
+        <div>cdhkhdsk7</div>
+    </template>
+    <script>
+        let child={
+            template:'#child'
+        }
+        let parent={
+            template:'#parent',
+            components:{
+                child
+            },
+            props:['attr']
+        }
+
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                msg:'人民币200元'
+            },
+            components:{
+                parent,
+                par:{
+                    template:'<div style="color:red">儿子掏钱{{title}}</div>',
+                    props:{
+                        title:{
+                            type:[Number,Boolean,Array,String,Object],
+                            default:'默认无',
+                            validator(val){
+                               return parseInt(val)>100;
+                            }
+                        }
+                    },
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

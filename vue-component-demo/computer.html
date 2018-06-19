@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{count}}
+    <click @change="counter" :title="count"></click>
+</div>
+<script>
+    let vm=new Vue({
+        el:"#app",
+        data:{
+            count:1
+        },
+        methods:{
+            counter(val){
+                this.count+=val;
+            }
+        },
+        components:{
+            click:{
+                template:'<button @click="add">计数器{{title}}</button>',
+                methods:{
+                    add(){
+                        this.$emit('change',1)
+                    }
+                },
+                props:{
+                    title:{
+
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

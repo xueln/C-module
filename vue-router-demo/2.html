@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child></child>
+        <brother></brother>
+    </div>
+    <script>
+        let eventBus=new Vue();
+        new Vue({
+            el:"#app",
+            components:{
+                child:{
+                    data(){
+                        return {a:'兄弟1颜色为红'}
+                    },
+                    template:'<div @click="changeTwo">{{a}}</div>',
+                    methods:{
+                        changeTwo(){
+                            eventBus.$emit('event1','传递')
+                        }
+                    },
+                    created(){
+                        eventBus.$on('event2',(val)=>{
+                            this.a=val;
+                        })
+                    },
+                    beforeDestroy(){
+
+                    }
+
+                },
+                brother:{
+                    template:'<div @click="changeOne">{{a}}</div>',
+                    data(){
+                        return {a:'兄弟2颜色为黄'}
+                    },
+                    methods:{
+                        changeOne(){
+                            eventBus.$emit('event2','改变兄弟1')
+                        }
+                    },
+                    created(){
+                        eventBus.$on('event1',(val)=>{
+                            this.a=val;
+                        });
+                    },
+                    beforeDestroy(){
+
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

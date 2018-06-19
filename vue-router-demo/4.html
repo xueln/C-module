@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       <input type="radio" value="man" v-model="val">
+        <input type="radio" value="woman" v-model="val">
+        {{val}}
+        <keep-alive>
+            <component :is="val"></component>
+        </keep-alive>
+
+    </div>
+
+
+    <script>
+        let man={
+            template:'<div>男人</div>'
+        }
+        let woman={
+            template:'<div>女人</div>'
+        }
+        new Vue({
+            el:"#app",
+           data:{
+                val:''
+           },
+
+            components:{
+                man,
+                woman
+            }
+
+        })
+    </script>
+</body>
+</html>

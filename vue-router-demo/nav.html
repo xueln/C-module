@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">路由</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <router-link to="/home">首页</router-link>
+
+                    </li>
+                    <li>
+                        <router-link to="/person">个人中心</router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <router-view></router-view>
+        </div>
+    </div>
+    <template id="personal">
+        <div>
+            <div class="col-md-3">
+                <ul class="nav nav-stacked">
+                    <li>
+                        <router-link to="/person/introduce">简介</router-link>
+
+                    </li>
+                    <li>
+                        <router-link to="/person/aboutme">关于</router-link>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <router-view></router-view>
+            </div>
+        </div>
+    </template>
+    <template id="home">
+        <div>
+            <div class="col-md-3">
+                <ul class="nav nav-stacked">
+                    <li>
+                        <router-link to="/home/homeitem1">条目一</router-link>
+
+                    </li>
+                    <li>
+                        <router-link to="/home/homeitem2">条目二</router-link>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <router-view></router-view>
+            </div>
+        </div>
+    </template>
+    <script>
+        let Home={
+            template:'#home'
+        }
+
+        let Person={
+            template:'#personal',
+
+        }
+        let Introduce={
+            template:'<div>个人简介</div>'
+        }
+        let Aboutme={
+            template:'<div>关于我们</div>'
+        }
+        let Homeitem1={
+            template:'<div>首页条目一</div>'
+        }
+        let Homeitem2={
+            template:'<div>首页条目二</div>'
+        }
+        let routes=[
+            {
+                path:'',component:Home
+            },
+            {
+                path:'/home',component:Home,
+                children:[
+                    {
+                        path:'homeitem1',component:Homeitem1
+                    },
+                    {
+                        path:'homeitem2',component:Homeitem2
+                    }
+                ]
+            },{
+                 path:'/person',component:Person,
+                children:[
+                    {path:'aboutme',component:Aboutme},
+                    {path:'introduce',component:Introduce},
+
+                ]
+            }
+
+
+        ]
+
+        let router=new VueRouter({
+            mode:'hash',
+            routes
+        });
+        new Vue({
+            el:"#app",
+            router,
+            data:{
+
+           },
+
+
+        })
+    </script>
+</body>
+</html>

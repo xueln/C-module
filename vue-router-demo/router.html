@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/home" tag="button">首页</router-link>
+        <router-link to="/list" tag="button">列表</router-link>
+        <router-view></router-view>
+    </div>
+
+    
+    <script>
+        let Home={
+            template:'<div>首页</div>'
+        }
+        let List={
+            template:'<div>列标签页</div>'
+        }
+        let routes=[
+            {
+                path:'',component:Home
+            },
+            {
+                path:'/home',component:Home
+            },{
+            path:'/list',component:List
+            },
+//            {
+//                path:'*',component:List
+//            },
+            {
+                path:'*',redirect:'/list'
+            }
+        ]
+
+        let router=new VueRouter({
+            mode:'hash',
+            routes
+        });
+        new Vue({
+            el:"#app",
+            router,
+            data:{
+
+           },
+
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <hello></hello>
+        <Go></Go>
+    </div>
+    <script>
+        Vue.component('Go',{
+            template:'<div>速度和社交活动手机端手机端{{a}}</div>',
+            data(){
+                return {a:234}
+            }
+        })
+        let vm=new Vue({
+            el:"#app",
+            components:{
+                hello:{
+                    template:'<div @click="fn">1111111111111{{a}}</div>',
+                    data(){
+                        return {a:98792839283}
+                    },
+                    methods:{
+                        fn(){
+                            this.a=44444
+                            alert(44)
+                        }
+                    }
+                },
+                word:{
+                    template:'<div>3333333333</div>'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+       <div v-if="false">123</div>
+       <div v-else-if="false">elseifdeuyu</div>
+       <div v-else>333</div>
+        <!-- 显示为333-->
+        <button @click="cut=!cut">单</button>
+        <template v-if="cut">
+            <label>注册</label>
+            <input type="text" key="1"/>
+        </template>
+        <template v-else>
+            <label>登陆</label>
+            <input type="text" key="2"/>
+        </template>
+    </div>
+
+<script>
+  let vm = new Vue({
+      el:'#app',
+      data:{
+          cut:false,
+          msg:"",
+          tip:"",
+          name:"",
+          firstName:'xue',
+          lastName:'na'
+      }
+
+      
+    
+    
+  })
+
+</script>
+
+
+</body>
+</html>

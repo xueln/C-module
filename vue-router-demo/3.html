@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="show">出现</button>
+        <modal v-show="isShow"  @hide="hide">
+            <div>
+                {{a}}
+            </div>
+            <footer slot="footer">我是尾部</footer>
+            <h4 slot="header">我是标题</h4>
+
+        </modal>
+
+    </div>
+    <template id="modal">
+        <div id="alert">
+            <slot name="header"></slot>
+            <slot>我是内容内天</slot>
+            <slot name="footer"></slot>
+
+            <button @click="close" >关闭</button>
+        </div>
+    </template>
+    <style >
+        #alert{
+            position:fixed;
+            top:50%;
+            left:50%;
+            transform:translate(-130px,-150px);
+            height:300px;
+            width:260px;
+            border:1px solid black;
+
+
+        }
+    </style>
+    <script>
+
+        new Vue({
+            el:"#app",
+            data:{
+                a:'我是内容',
+                isShow:false
+            },
+            methods:{
+
+                show(){
+                    this.isShow=true
+                },
+                hide(val){
+                    this.isShow=val;
+
+                }
+            },
+            components:{
+                modal:{
+                    template:"#modal",
+                    methods:{
+
+                        close(){
+
+                            this.$emit('hide',false)
+                        }
+                    }
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

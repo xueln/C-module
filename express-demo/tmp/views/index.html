@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title%></title>
+
+</head>
+<body>
+<div id="app">
+    <ul>
+        <%
+            for(let i=0;i<users.length;i++){
+                let user=users[i];
+                %>
+                <li><%= user.name %></li>
+        <%
+            }
+        %>
+
+    </ul>
+    <%-msg%>
+
+</div>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <child :title.sync="msg" ref="children"></child>
+        <button @click="hit">提示</button>
+    </div>
+
+    <script>
+
+
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                msg:'人民币50元'
+            },
+            methods:{
+                hit(){
+                    this.$refs.children.fn()
+                }
+
+            },
+            components:{
+
+                child:{
+                    template:'<div style="color:red">儿子掏钱{{title}}<button @click="update">变化</button></div>',
+                    props:{
+                        title:{
+                            type:[Number,Boolean,Array,String,Object],
+                            //default:'默认无',
+                            validator(val){
+                               return parseInt(val)>100;
+                            }
+                        }
+                    },
+                    methods:{
+                        fn(){
+                            alert('son')
+                        },
+                        update(){
+                            this.$emit('update:title','1000元')
+                        }
+                    }
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

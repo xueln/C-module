@@ -1,0 +1,53 @@
+.header{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:99999;
+  height:50px;
+background: black;
+  .ico{
+    float:right;
+    color:#fff;
+    margin-top:5px;
+  }
+  img{
+    width:212px;
+    height:50px;
+  }
+  .hide{
+    opacity: 0;
+    display: none;
+  }
+  .menu-list{
+    position: absolute;
+    width:100%;
+    top:50px;
+    background: black;
+    transition: 2s;
+    z-index:9999;
+    li{
+      height:45px;
+      line-height:45px;
+      box-sizing: border-box;
+      color:#fff;
+      text-align: center;
+      padding:0 10px;
+      border-top:1px solid #fff;
+
+    }
+    .active{
+      color:red;
+    }
+  }
+  .fade-enter{
+    opacity: 0;
+  }
+  .fade-enter.fade-enter-active{
+    opacity: 1;
+    transition: 3s;
+  }
+  .fade-exit.fade-exit-active{
+    opacity: 0;
+    transition: 3s;
+  }
+}

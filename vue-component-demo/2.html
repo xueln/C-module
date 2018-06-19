@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <parent></parent>
+
+        <template id="parent">9999999999</template>
+    </div>
+    <script>
+        Vue.component('Go',{
+            template:'<div>速度和社交活动手机端手机端{{a}}</div>',
+            data(){
+                return {a:234}
+            }
+        });
+        let subchild={
+            template:'<div @click="fn">菠菜</div>',
+            methods:{
+                fn(){
+                    alert(this)
+                }
+            }
+        }
+        let child={
+            template:'<div>绿叶{{subType}}<subchild></subchild><go></go></div>',
+            components:{
+                subchild
+            },
+            props:['subType']
+        };
+        let parent={
+            template:'<div >蔬菜{{type}}<child :subType="type"></child></div>',
+            data(){
+                return {type:'总科目'}
+            },
+            components:{
+                child
+            }
+        }
+        let vm=new Vue({
+            el:"#app",
+            components:{
+                parent
+
+            }
+        })
+    </script>
+</body>
+</html>

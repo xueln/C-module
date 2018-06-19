@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+    <style>
+    .a{
+        background: yellow
+    }
+    .b{
+        color:red;
+    }
+    .c{
+        font-size: 30px;
+    }
+    </style>
+
+</head>
+<body>
+
+    <div id="app">
+       <div :class="['a','b']">以数组的方式</div>
+       <div :class="{a:cut,b:cut2,c:cut3}" >以对象的方式</div>
+    </div>
+
+<script>
+  let vm = new Vue({
+      el:'#app',
+      data:{
+          cut:true,
+         cut2:false,
+         cut3:false,
+         
+      }
+
+      
+    
+    
+  })
+
+</script>
+
+
+</body>
+</html>

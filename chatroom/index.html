@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+</head>
+<body>
+<div id="root">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>帮助中心</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul id="list">
+                            
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control content" id="content"/>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary btn-xs" id="send">发送</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js">
+
+</script>
+<script>
+    let send=document.getElementById('send');
+    let content=document.getElementById('content')
+    let list=document.getElementById('list')
+    let socket =io();
+    socket.on('connect',function(){
+    
+       
+        send.onclick=function(){
+            socket.send(content.value)
+        }
+        
+        window.onload=function(){
+            socket.emit('getAll')
+            socket.on('all',function(data){
+                list.innerHTML=data.map(item=>(`<li class="list-group-item">${item.msg}</li>`)).join('')
+                
+                
+            })
+        }
+    })
+    socket.on('message',function(msg){
+        
+        list.innerHTML+='<li>'+msg.msg+'</li>'
+    })
+    
+</script>
+</body>
+</html>

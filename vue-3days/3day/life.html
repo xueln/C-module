@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+    <style>
+    .a{
+        background: yellow
+    }
+    .b{
+        color:red;
+    }
+    .c{
+        font-size: 30px;
+    }
+    </style>
+
+</head>
+<body>
+
+    <div id="app">
+       <p ref="choose" v-for="item in attr">{{flag}}{{item}}</p>
+    </div>
+
+<script>
+    //this.$data this.$watch this.$el this.$set this.$options
+    //this.$nextTick this.$refs
+  let vm = new Vue({
+     
+      beforeCreate(){//初始化内部的方法
+          console.log(this,'bc')
+      },
+      data:{
+         flag:'red',
+         a:123,
+         attr:[3,4,5]
+         
+      },
+      created(){//初始化data等 请求数据
+          console.log(this,'c')
+      },
+      beforeMount(){//没用
+
+      },
+
+      //template:'<div id="self">{{flag}}</div>',
+      mounted(){//真实dom渲染完成
+        console.log('------------')
+        console.log(this.$refs.choose);
+       
+        this.$nextTick(()=>{
+            this.attr=[1,1,1,1,1]
+            console.log(this.$refs.choose);
+        })
+        
+        
+      },
+      beforeUpdate(){//一般用watch来替代
+        console.log('更新之前')
+      },
+      updated(){//一般用watch来替代
+        console.log('更新了')
+      },
+      beforeDestroy(){//清除定时器 解除事件绑定
+        console.log('销毁前')
+      },
+      destroyed(){
+        console.log('销毁')
+      }
+    
+  }).$mount('#app') //等同于el:'#app',
+  vm.$destroy();
+</script>
+
+
+</body>
+</html>

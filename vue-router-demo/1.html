@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child ref="son"></child>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            mounted(){
+                this.$nextTick(
+                    ()=>{
+                        console.log(this.$refs.son.$el.innerHTML);
+                    }
+                )
+                console.log(this.$refs.son.$el.innerHTML);
+            },
+            components:{
+                child:{
+                    mounted(){
+                        this.a=5
+                    },
+                    data(){
+                        return {a:1}
+                    },
+                    template:'<header>{{a}}</header>',
+                    methods:{
+
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

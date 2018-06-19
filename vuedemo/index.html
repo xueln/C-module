@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="./css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+        <input type="text" v-model="query">
+        <select v-model="selected">
+          <option value="">请选择</option>
+          <option value="0">英语</option>
+          <option value="1">数学</option>
+          <option value="2">语文</option>
+        </select>
+        <table class="table table-bordered table-hover">
+          <tr>
+            <th @click="changeType(0)">英语</th>
+            <th @click="changeType(1)">数学</th>
+            <th @click="changeType(2)">语文</th>
+          </tr>
+          <tr v-for="score in newScores">
+            <td v-html="changeColor('0',score.english,query)"></td>
+            <td v-html="changeColor('1',score.math,query)"></td>
+            <td v-html="changeColor('2',score.chinese,query)"></td>
+          </tr>
+          
+        </table>
+</div>
+<script src="./js/vue.js"></script>
+<script>
+  let vm = new Vue({
+      el:'#app',
+      methods:{
+          changeType(t){
+            this.type = t;
+            this.sort*=-1;
+          },
+          changeColor(code,origin,query){
+            if(query && code==this.selected || this.selected==''){
+              let reg=new RegExp(query,'g');
+              return origin.toString().replace(reg,function(){
+                return `<span style="color:red;background:yellow">${arguments[0]}</span>`
+              })
+            }else{
+              return origin;
+            }
+            
+          }
+
+      },
+      filters:{
+        //过滤函数
+      },
+      computed:{
+        newScores(){
+          switch(this.type){
+            case 0: 
+
+              return this.scores.sort((a,b)=>{
+                  return (a.english-b.english)*this.sort
+              });
+              break;
+             case 1:
+                return this.scores.sort((a,b)=>{
+                    return (a.math-b.math)*this.sort
+                });
+                break;
+              case 2: 
+                return this.scores.sort((a,b)=>{
+                  return (a.chinese-b.chinese)*this.sort
+                });
+                break;
+             default: return this.scores;break;
+          }
+           
+        }
+      },
+      
+    
+      // watch:{
+      //   type(newvalue,oldvalue){
+      //     switch(newvalue){
+      //       case 0: 
+      //         this.scores.sort((a,b)=>{
+      //             return (a.english-b.english)*this.sort
+      //         });
+      //         break;
+      //        case 1:
+      //           this.scores.sort((a,b)=>{
+      //               return (a.math-b.math)*this.sort
+      //           });
+      //           break;
+      //         case 2: 
+      //           this.scores.sort((a,b)=>{
+      //             return (a.chinese-b.chinese)*this.sort
+      //           });
+      //           break;
+      //        default:;break;
+      //     }
+      //   }
+      // },
+      data:{
+          type:'',
+          sort:1,
+          query:'',
+          selected:'',
+          scores:[
+              {english:30,math:100,chinese:88},
+              {english:18,math:98,chinese:23},
+              {english:56,math:22,chinese:77},
+              {english:98,math:33,chinese:55}
+          ],
+          test:[1,2,3]
+      }
+  })
+</script>
+</body>
+</html>
